@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
+import Config from './components/conf';
+import Send from './components/send';
+import Pressure from './components/pressure';
+import uibuilder from './libs/uibuilderfe';
+
 function App() {
+  uibuilder.start();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Send />
+        <Config />
+        <Pressure />
     </div>
   );
 }
