@@ -5,6 +5,7 @@ import uibuilder from '../libs/uibuilderfe';
 const Config = () => {
 
   const [msgRecvd, setMsgRecvd] = useState({});
+  const dataFake = 20
   
     const dados =  useCallback(()=>{
       uibuilder.onChange('msg', (newVal) => {
@@ -17,15 +18,21 @@ const Config = () => {
 
   return(
     <Chart
-        width={400}
-        height={120}
+        width={'100%'}
+        height={'100%'}
         chartType="Gauge"
         loader={<div>Loading Chart</div>}
+        // data={[
+        //   ['Label', 'Value'],
+        //   ['Pressão', msgRecvd.pressao],
+        //   ['Oxigenação', msgRecvd.oxigenio],
+        //   ['Saturação', msgRecvd.saturation],
+        // ]}
         data={[
           ['Label', 'Value'],
-          ['Pressão', msgRecvd.pressao],
-          ['Oxigenação', msgRecvd.oxigenio],
-          ['Saturação', msgRecvd.saturation],
+          ['Pressão', dataFake],
+          ['Oxigenação', dataFake],
+          ['Saturação', dataFake],
         ]}
         options={{
           redFrom: 90,
