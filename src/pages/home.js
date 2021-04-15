@@ -18,7 +18,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
+
 
 
 // icones 
@@ -144,7 +144,7 @@ export default function MiniDrawer() {
           </IconButton>
           <div className={classes.grow}/>
           <Typography variant="h6" noWrap>
-          Supervisorio
+          Supervisório
           </Typography>
           <div className={classes.grow}/>
         </Toolbar>
@@ -215,9 +215,6 @@ export default function MiniDrawer() {
             }else if(component === 'Lista'){
               return <p>ok</p>
             }
-            // else if(component === 'info'){
-            //   return <Teste />
-            // }
           })()
         }
         

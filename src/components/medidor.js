@@ -5,16 +5,21 @@ import uibuilder from '../libs/uibuilderfe';
 const Config = () => {
 
   const [msgRecvd, setMsgRecvd] = useState({});
+  const [tempo, setTempo] = useState([0]);
   const dataFake = 20
   
     const dados =  useCallback(()=>{
       uibuilder.onChange('msg', (newVal) => {
-        setMsgRecvd(newVal.payload)          
+        setMsgRecvd(newVal.payload)
+        //setTempo(oldArray => [...oldArray, newVal.payload.tempo]);       
+        //console.log(tempo)
+        
+
         console.log(msgRecvd)
       })
     },[msgRecvd])
-      
-    dados();
+    setInterval(dados, 300);
+    //dados();
 
   return(
     <Chart
@@ -22,18 +27,18 @@ const Config = () => {
         height={'100%'}
         chartType="Gauge"
         loader={<div>Loading Chart</div>}
-        // data={[
-        //   ['Label', 'Value'],
-        //   ['Pressão', msgRecvd.pressao],
-        //   ['Oxigenação', msgRecvd.oxigenio],
-        //   ['Saturação', msgRecvd.saturation],
-        // ]}
         data={[
           ['Label', 'Value'],
-          ['Pressão', dataFake],
-          ['Oxigenação', dataFake],
-          ['Saturação', dataFake],
+          // ['Pressão', msgRecvd.cardio],
+          ['Oxigenação', msgRecvd.oxi],
+          ['Cardio', msgRecvd.cardio],
         ]}
+        // data={[
+        //   ['Label', 'Value'],
+        //   ['Pressão', dataFake],
+        //   ['Oxigenação', dataFake],
+        //   ['Saturação', dataFake],
+        // ]}
         options={{
           redFrom: 90,
           redTo: 100,
