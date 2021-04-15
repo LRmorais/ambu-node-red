@@ -2,24 +2,32 @@ import React, {useCallback, useState} from 'react';
 import {Chart} from "react-google-charts";
 import uibuilder from '../libs/uibuilderfe';
 
+uibuilder.start();
 const Config = () => {
+
 
   const [msgRecvd, setMsgRecvd] = useState({});
   const [tempo, setTempo] = useState([0]);
   const dataFake = 20
   
-    const dados =  useCallback(()=>{
+    const data = () =>{
       uibuilder.onChange('msg', (newVal) => {
         setMsgRecvd(newVal.payload)
-        //setTempo(oldArray => [...oldArray, newVal.payload.tempo]);       
-        //console.log(tempo)
-        
-
-        console.log(msgRecvd)
+        console.log('oi')
       })
-    },[msgRecvd])
-    setInterval(dados, 300);
-    //dados();
+    }
+
+    // const dados =  useCallback(()=>{
+    //   uibuilder.onChange('msg', (newVal) => {
+    //     setMsgRecvd(newVal)
+    //     //setTempo(oldArray => [...oldArray, newVal.payload.tempo]);       
+    //     //console.log(tempo)
+    //     console.log('oi')
+    //   })
+    // },[])
+    // setInterval(data, 300);
+    data();
+    
 
   return(
     <Chart

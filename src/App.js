@@ -9,10 +9,20 @@ import uibuilder from './libs/uibuilderfe';
 import Dashboard from './pages/home';
 
 function App() {
+
   uibuilder.start();
+  const [msgRecvd, setMsgRecvd] = React.useState({});
+  const dados = () =>{
+    uibuilder.onChange('msg', (newVal) => {
+      setMsgRecvd(newVal)
+      console.log(msgRecvd)
+    })
+  }
+  dados();
+  
   return (
     <div className="App">
-        <Dashboard />
+        {/* <Dashboard /> */}
         {/* <Send />
         <Config />
         <Pressure /> */}
