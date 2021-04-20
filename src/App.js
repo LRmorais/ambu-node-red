@@ -8,17 +8,17 @@ import uibuilder from './libs/uibuilderfe';
 
 import Dashboard from './pages/home';
 
+uibuilder.start();
 function App() {
 
-  uibuilder.start();
+
   const [msgRecvd, setMsgRecvd] = React.useState({});
-  const dados = () =>{
+
     uibuilder.onChange('msg', (newVal) => {
-      setMsgRecvd(newVal)
+      setMsgRecvd(newVal.payload)
       console.log(msgRecvd)
     })
-  }
-  dados();
+  
   
   return (
     <div className="App">
