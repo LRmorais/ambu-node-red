@@ -208,11 +208,11 @@ export default function MiniDrawer() {
           ( () => {
             if (component === 'Dashboard'){
               return <Dashboard />
-            }else if (component === 'Mapa'){
+            }else if (component === 'Pressure'){
               return <p>ok</p>
-            }else if(component === 'Gauge'){
+            }else if(component === 'Oxi'){
               return <p>ok</p>
-            }else if(component === 'Lista'){
+            }else if(component === 'bmp'){
               return <p>ok</p>
             }
           })()
