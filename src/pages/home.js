@@ -144,7 +144,7 @@ export default function MiniDrawer() {
           </IconButton>
           <div className={classes.grow}/>
           <Typography variant="h6" noWrap>
-          Supervisório
+          AMBU
           </Typography>
           <div className={classes.grow}/>
         </Toolbar>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import { withStyles } from '@material-ui/core/styles';
+
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -12,10 +12,13 @@ import PropTypes from 'prop-types';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Box from '@material-ui/core/Box';
 
-
-
+import { Block } from '@material-ui/icons';
 import Pressure from '../components/pressure';
 import Medidor from '../components/medidor';
+import imgagemEscolhida from '../assets/heart.png';
+import oxyGen from '../assets/oxygen.png';
+
+import { useData } from '../services/context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     justifyContent: 'center',
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
+    fontSize: 25,
   },
 }));
 
@@ -70,23 +74,20 @@ const IOSSwitch = withStyles((theme) => ({
   },
   checked: {},
   focusVisible: {},
-}))(({ classes, ...props }) => {
-  return (
-    <Switch
-      focusVisibleClassName={classes.focusVisible}
-      disableRipple
-      classes={{
-        root: classes.root,
-        switchBase: classes.switchBase,
-        thumb: classes.thumb,
-        track: classes.track,
-        checked: classes.checked,
-      }}
-      {...props}
-    />
-  );
-});
-
+}))(({ classes, ...props }) => (
+  <Switch
+    focusVisibleClassName={classes.focusVisible}
+    disableRipple
+    classes={{
+      root: classes.root,
+      switchBase: classes.switchBase,
+      thumb: classes.thumb,
+      track: classes.track,
+      checked: classes.checked,
+    }}
+    {...props}
+  />
+));
 
 function LinearProgressWithLabel(props) {
   return (
@@ -95,9 +96,12 @@ function LinearProgressWithLabel(props) {
         <LinearProgress variant="determinate" {...props} />
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">{`${Math.round(
-          props.value,
-        )}%`}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {`${Math.round(
+            props.value,
+          )}%`}
+
+        </Typography>
       </Box>
     </Box>
   );
@@ -108,6 +112,7 @@ LinearProgressWithLabel.propTypes = {
 };
 
 export default function CenteredGrid() {
+  const { msg } = useData();
   const classes = useStyles();
   const [state, setState] = React.useState({
     checkedA: true,
@@ -135,56 +140,61 @@ export default function CenteredGrid() {
     };
   }, []);
 
-
   return (
     <div className={classes.root}>
-      <Grid container spacing={3} direction="row"
+      <Grid
+        container
+        spacing={3}
+        direction="row"
         justify="space-between"
         alignItems="center"
       >
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper className={classes.paper}>Controles</Paper>
-        </Grid>
-        <Grid item xs={6}>
+        </Grid> */}
+        {/* <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Pressure />
           </Paper>
+        </Grid> */}
+        <Grid item xs={12} 
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center">
+          <Paper className={classes.paper}>
+            <Medidor />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            <figure style={{ display: 'inline-block', position: 'relative' }}>
+              <img alt="oxygen" style={{ height: 180, width: 250 }} src={oxyGen} />
+              <figcaption style={{ position: 'absolute', bottom: '28%', left: 18, color: "red" }}>O2</figcaption>
+              <figcaption style={{ position: 'absolute', bottom: '28%', left: 110,  color: "red"  }}>94 %</figcaption>
+            </figure>
+
+          </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}><Medidor /></Paper>
-        </Grid>
-        <Grid item xs={3}>
           <Paper className={classes.paper}>
-
-            <Typography id="range-slider" gutterBottom>
-              Controle 1
-            </Typography>
-            <Slider
-              value={value}
-              onChange={handleChange}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              getAriaValueText={valuetext}
-            />
-
+            <figure style={{ display: 'inline-block', position: 'relative' }}>
+              <img alt="Heart" style={{ height: 180 }} src={imgagemEscolhida} />
+              <figcaption style={{ position: 'absolute', bottom: '60%', left: 50 }}>BPM</figcaption>
+              <figcaption style={{ position: 'absolute', bottom: '35%', left: 85 }}>65.7</figcaption>
+            </figure>
           </Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-          <Typography id="range-slider" gutterBottom>
-              Controle 2
-            </Typography>
-            <FormControlLabel
-              control={<IOSSwitch checked={state.checkedB} onChange={handleChangeButton} name="checkedB" />}
-              label=""
-            />
-          </Paper>
+
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>BPM: 65.7</Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}><LinearProgressWithLabel value={progress} /></Paper>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>O2: 94%</Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>{`${msg} cm H2O`}</Paper>
         </Grid>
       </Grid>
     </div>
