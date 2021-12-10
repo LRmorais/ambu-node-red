@@ -1,4 +1,5 @@
 import React from 'react';
+import { useData } from '../services/context';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -18,7 +19,6 @@ import Medidor from '../components/medidor';
 import imgagemEscolhida from '../assets/heart.png';
 import oxyGen from '../assets/oxygen.png';
 
-import { useData } from '../services/context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -140,6 +140,7 @@ export default function CenteredGrid() {
     };
   }, []);
 
+  
   return (
     <div className={classes.root}>
       <Grid
@@ -172,7 +173,7 @@ export default function CenteredGrid() {
             <figure style={{ display: 'inline-block', position: 'relative' }}>
               <img alt="oxygen" style={{ height: 180, width: 250 }} src={oxyGen} />
               <figcaption style={{ position: 'absolute', bottom: '28%', left: 18, color: "red" }}>O2</figcaption>
-              <figcaption style={{ position: 'absolute', bottom: '28%', left: 110,  color: "red"  }}>94 %</figcaption>
+              <figcaption style={{ position: 'absolute', bottom: '28%', left: 110,  color: "red"  }}>{`${msg.oxi ? msg.oxi : '...'}%`}</figcaption>
             </figure>
 
           </Paper>
@@ -182,19 +183,19 @@ export default function CenteredGrid() {
             <figure style={{ display: 'inline-block', position: 'relative' }}>
               <img alt="Heart" style={{ height: 180 }} src={imgagemEscolhida} />
               <figcaption style={{ position: 'absolute', bottom: '60%', left: 50 }}>BPM</figcaption>
-              <figcaption style={{ position: 'absolute', bottom: '35%', left: 85 }}>65.7</figcaption>
+              <figcaption style={{ position: 'absolute', bottom: '35%', left: 85 }}>{msg.cardio ? msg.cardio : '...'}</figcaption>
             </figure>
           </Paper>
         </Grid>
 
         <Grid item xs={4}>
-          <Paper className={classes.paper}>BPM: 65.7</Paper>
+          <Paper className={classes.paper}>{`BPM: ${msg.cardio ? msg.cardio : '...'}`}</Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}>O2: 94%</Paper>
+          <Paper className={classes.paper}>{`O2: ${msg.oxi ? msg.oxi : '...'}%`}</Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}>{`${msg} cm H2O`}</Paper>
+          <Paper className={classes.paper}>{`${msg.pressao ? msg.pressao : '...'} cm H2O`}</Paper>
         </Grid>
       </Grid>
     </div>
