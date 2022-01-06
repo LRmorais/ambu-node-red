@@ -29,6 +29,7 @@ import { FcElectricalSensor, FcLike, FcBarChart, FcDataRecovery } from "react-ic
 // componentes a serem renderizados
 import Pressure from '../components/pressure';
 import Dashboard from './dashboard';
+import Teste from './teste';
 
 const drawerWidth = 240;
 
@@ -211,7 +212,7 @@ export default function MiniDrawer() {
             }else if (component === 'Pressure'){
               return <p>ok</p>
             }else if(component === 'Oxi'){
-              return <p>ok</p>
+              return <Teste />
             }else if(component === 'bmp'){
               return <p>ok</p>
             }
