@@ -1,22 +1,22 @@
 import React, {createContext, useContext, useState} from 'react';
-import uibuilder from '../libs/uibuilderfe';
+// import uibuilder from '../libs/uibuilderfe';
 // import uibuilder from 'node-red-contrib-uibuilder/front-end/src/uibuilderfe'
 
 
 
 const DataContext = createContext();
 // starta a conexão com node red
-uibuilder.start();
+// uibuilder.start();
 
 export default function DataProvider({children}) {
   const [msg, setMsg] = useState({})
 
-    const data = () =>{
-      uibuilder.onChange('msg', (newVal) => {
-        setMsg(newVal.payload)
-      })
-    }
-    data();
+    // const data = () =>{
+    //   uibuilder.onChange('msg', (newVal) => {
+    //     setMsg(newVal.payload)
+    //   })
+    // }
+    // data();
 
 
     return <DataContext.Provider 
