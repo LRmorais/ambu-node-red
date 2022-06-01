@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+
 
 import Dashboard from './pages/home';
 import DataProvider from './services/context';

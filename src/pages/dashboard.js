@@ -22,39 +22,16 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function CenteredGrid() {
-  const { msg, response } = useData();
-  console.log(response)
+  const { msg } = useData();
+
   var pressao = 0;
-  // const msg = {pressao: 20}
 
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedC: true,
-  });
-  
 
-  const [progress, setProgress] = React.useState(10);
+
   const [estilo, setEstilo] = React.useState('safe');
 
-  const handleChangeButton = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-  const [value, setValue] = React.useState([20, 37]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   
   return (
@@ -76,8 +53,7 @@ export default function CenteredGrid() {
           <Paper className={classes.paper}>{`Saturação: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '96%'}`}</Paper>
         </Grid>
         <Grid item xs={3}>
-          {/* <Paper className={classes.paper}>{`CO2: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '15%'}`}</Paper> */}
-          <Paper className={classes.paper}>{response}</Paper>
+          <Paper className={classes.paper}>{`CO2: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '15%'}`}</Paper>
         </Grid>
 
         <Grid item xs={12} 

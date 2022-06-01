@@ -2,14 +2,7 @@ import React, {createContext, useContext, useState, useEffect} from 'react';
 import socketIOClient from 'socket.io-client';
 const ENDPOINT = "http://localhost:4001";
 
-// import uibuilder from '../libs/uibuilderfe';
-// import uibuilder from 'node-red-contrib-uibuilder/front-end/src/uibuilderfe'
-
-
-
 const DataContext = createContext();
-// starta a conexão com node red
-// uibuilder.start();
 
 export default function DataProvider({children}) {
   const [msg, setMsg] = useState({})
