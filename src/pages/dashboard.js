@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function CenteredGrid() {
-  const { msg } = useData();
-  console.log(msg)
+  const { msg, response } = useData();
+  console.log(response)
   var pressao = 0;
   // const msg = {pressao: 20}
 
@@ -76,7 +76,8 @@ export default function CenteredGrid() {
           <Paper className={classes.paper}>{`Saturação: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '96%'}`}</Paper>
         </Grid>
         <Grid item xs={3}>
-          <Paper className={classes.paper}>{`CO2: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '15%'}`}</Paper>
+          {/* <Paper className={classes.paper}>{`CO2: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '15%'}`}</Paper> */}
+          <Paper className={classes.paper}>{response}</Paper>
         </Grid>
 
         <Grid item xs={12} 
