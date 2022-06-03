@@ -1,23 +1,23 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
-import socketIOClient from 'socket.io-client';
-const ENDPOINT = "http://localhost:4001";
+// import socketIOClient from 'socket.io-client';
+// const ENDPOINT = "http://localhost:4001";
 
 const DataContext = createContext();
 
 export default function DataProvider({children}) {
   const [msg, setMsg] = useState({})
-  const [response, setResponse] = useState("");
-  const [serial, setSerial] = useState('serial2');
+  // const [response, setResponse] = useState("");
+  // const [serial, setSerial] = useState('serial2');
 
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.on("FromAPI", data => {
-      setResponse(data);
-    });
-    socket.on("FromAPI2", data => {
-      setSerial(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const socket = socketIOClient(ENDPOINT);
+  //   socket.on("FromAPI", data => {
+  //     setResponse(data);
+  //   });
+  //   socket.on("FromAPI2", data => {
+  //     setSerial(data);
+  //   });
+  // }, []);
 
     // const data = () =>{
     //   uibuilder.onChange('msg', (newVal) => {
@@ -28,7 +28,7 @@ export default function DataProvider({children}) {
 
 
     return <DataContext.Provider 
-    value={{msg, setMsg, response}}>
+    value={{msg, setMsg}}>
       {children}
     </DataContext.Provider>
 }

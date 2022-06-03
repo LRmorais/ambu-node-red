@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useData } from '../services/context';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import socketIOClient from 'socket.io-client';
+
+const ENDPOINT = "http://localhost:4001";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +25,27 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function CenteredGrid() {
-  const { msg, response } = useData();
+  const [response, setResponse] = useState("");
+  const { msg } = useData();
+
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("FromAPI", data => {
+      try {
+        setResponse(JSON.parse(data));
+        console.log(JSON.parse(data))
+      } catch (err) {
+        // 👇️ This runs
+        setResponse('');
+      }
+      
+
+    });
+    // socket.on("FromAPI2", data => {
+    //   setSerial(data);
+    // });
+  }, []);
+
 
   var pressao = 0;
 
@@ -43,19 +66,18 @@ export default function CenteredGrid() {
         justify="space-between"
         alignItems="center"
       >
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Paper  className={classes.paper}>{`Pressão em cm H2O: ${msg.pressao ? msg.pressao : '19'}`}</Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>{`BPM: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '110'}`}</Paper>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>{`BPM: ${response.oxi ? response.cardio : ''}`}</Paper>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>{`Saturação: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '96%'}`}</Paper>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>{`Saturação: ${response.oxi ? response.oxi : ''}%`}</Paper>
         </Grid>
-        <Grid item xs={3}>
-          {/* <Paper className={classes.paper}>{`CO2: ${msg.pressao ? (msg.pressao*0.0980665).toFixed(2) : '15%'}`}</Paper> */}
-          <Paper className={classes.paper}>{`CO2: ${response}`}</Paper>
-        </Grid>
+        {/* <Grid item xs={3}>
+          <Paper className={classes.paper}>{`CO2: ${response.oxi ? response.oxi : ''}`}</Paper>
+        </Grid> */}
 
         <Grid item xs={12} 
           container
